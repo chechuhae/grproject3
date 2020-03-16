@@ -1,0 +1,89 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<header>
+    <center>
+    {% if request.user.is_authenticated %}
+    <a href="{% url "grp:logout" %}"> Выйти </a>
+    <a href="{% url "grp:edit_profile" %}" class="btn btn-sm btn-info">Редактировать</a>
+    <a href="{% url "grp:home" %}" class="btn btn-sm btn-info">На главную</a>
+    <a href="{% url "grp:profile" %}"> Профиль </a>
+    {% else %}
+        <a href="{% url "grp:login" %}"> Войти </a>
+    {% endif %}
+    </center>
+</header>
+<style>
+   .center {
+    width: 200px; /* Ширина элемента в пикселах */
+    padding: 10px; /* Поля вокруг текста */
+    margin-top: 10%; /* Выравниваем по центру */
+
+   }
+body {background: url(https://html5book.ru/wp-content/uploads/2015/07/background39.png);}
+a {
+  text-decoration: none;
+  outline: none;
+  display: inline-block;
+  width: 140px;
+  height: 45px;
+  line-height: 45px;
+  border-radius: 45px;
+  margin: 10px 20px;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 11px;
+  text-transform: uppercase;
+  text-align: center;
+  letter-spacing: 3px;
+  font-weight: 600;
+  color: #524f4e;
+  background: white;
+  box-shadow: 0 8px 15px rgba(0,0,0,.1);
+  transition: .3s;
+}
+a:hover {
+  background: #2EE59D;
+  box-shadow: 0 15px 20px rgba(46,229,157,.4);
+  color: white;
+  transform: translateY(-7px);
+}
+
+input[type="submit"] {
+  text-decoration: none;
+  outline: none;
+  display: inline-block;
+  width: 140px;
+  height: 45px;
+  line-height: 45px;
+  border-radius: 45px;
+  margin: 10px 20px;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 11px;
+  text-transform: uppercase;
+  text-align: center;
+  letter-spacing: 3px;
+  font-weight: 600;
+  color: #524f4e;
+  background: white;
+  box-shadow: 0 8px 15px rgba(0,0,0,.1);
+  transition: .3s;
+}
+
+input[type="submit"]:hover {
+  background: #2EE59D;
+  box-shadow: 0 15px 20px rgba(46,229,157,.4);
+  color: white;
+  transform: translateY(-7px);
+}
+
+
+</style>
+</head>
+<body>
+    {% include 'blocks/messages.html' %}
+    {% block content %}
+
+    {% endblock %}
+</body>
+</html>
