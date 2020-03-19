@@ -1,4 +1,3 @@
-from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login
 from django.views.generic import TemplateView
@@ -9,6 +8,7 @@ from grp.forms import LoginForm, RegisterForm, ProfileForm
 from django.contrib import messages
 from grp.models import Profile
 from django.urls import reverse
+from grp import forms
 
 class LoginView(TemplateView):
     template_name = "registration/login.html"
@@ -93,3 +93,6 @@ class EditProfileView(TemplateView):
 
 class ProfilePage(TemplateView):
     template_name = "registration/profile.html"
+
+
+
