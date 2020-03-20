@@ -20,14 +20,12 @@ class RegisterForm(forms.Form):
         return valid
 
 class ProfileForm(forms.ModelForm):
-
     class Meta:
         model = Profile
         exclude = ['user']
-
-
-class DateForm(forms.Form):
-    date = forms.DateTimeField(
-        input_formats=['%d/%m/%Y %H:%M'],
-        widget=BootstrapDateTimePickerInput()
-    )
+    def __init__(self, *args, **kwargs):
+        super(ProfileForm, self).__init__(*args, **kwargs)
+        self.fields['birth_date'] = forms.DateTimeField(
+            input_formats=['%d/%m/%Y'],
+            widget=BootstrapDateTimePickerInput()
+        )
