@@ -1,3 +1,7 @@
+
+<!-- 
+  Не нужно здесь подключать библиотеки и делать сам корневой документ (<html><body></body></html>).
+  Это просто кусок, который вставлятся в корневой документ. Корневой документ в твоем случае это base_2.html -->
 <div class="input-group date" id="{{ widget.datetimepicker_id }}" data-target-input="nearest">
   {% include "django/forms/widgets/input.html" %}
   <div class="input-group-append" data-target="#{{ widget.datetimepicker_id }}" data-toggle="datetimepicker">
@@ -8,7 +12,7 @@
 <script>
   $(function () {
     $("#{{ widget.datetimepicker_id }}").datetimepicker({
-      format: 'DD/MM/YYYY'
+      format: 'DD/MM/YYYY' // формат даты должен совпадать с указанным в виджете
     });
   });
 </script>

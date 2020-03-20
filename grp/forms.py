@@ -19,13 +19,15 @@ class RegisterForm(forms.Form):
             return False
         return valid
 
+# Тут происходит маппинг твоей модели профайла из базы данных с html-формой. Этот класс генерирует нужный html для всей формы
 class ProfileForm(forms.ModelForm):
     class Meta:
         model = Profile
         exclude = ['user']
+    # Эта функция повзволяет сделать специальный маппинг для полей (колонок) из твоей базы к полям html формы
     def __init__(self, *args, **kwargs):
         super(ProfileForm, self).__init__(*args, **kwargs)
-        self.fields['birth_date'] = forms.DateTimeField(
+        self.fields['birth_date'] = forms.DateTimeField( # Тут ты поле\колонку birth_date приязываешь к твоему кастомному виджету выбора даты
             input_formats=['%d/%m/%Y'],
-            widget=BootstrapDateTimePickerInput()
+            widget=BootstrapDateTimePickerInput() # Виджет будет применен конкретно к birth_date
         )

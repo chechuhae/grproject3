@@ -3,6 +3,8 @@
 <html lang="en">
 <head>
 <header>
+    <!-- Тут ты задаешь все js-библиотеки -->
+
     <!-- Bootstrap 4 -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
       integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
@@ -41,6 +43,11 @@
     </center>
 </header>
 <style>
+
+/* 
+Ты прописал глобальные стили, которые конфликтуют со стилями виджета. Глобально стили никогда не пишутся. 
+Я добаил id #grp что бы хоть немного уменьшить конфликт
+*/
 
 body#grp {background: url(https://html5book.ru/wp-content/uploads/2015/07/background39.png);}
 #grp a {
