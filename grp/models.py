@@ -1,9 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
-from calendar import HTMLCalendar
-from datetime import date
-from itertools import groupby
-from django.utils.html import conditional_escape as esc
+
 
 
 class Profile(models.Model):

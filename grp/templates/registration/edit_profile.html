@@ -2,6 +2,19 @@
 {% load static %}
 {% block content %}
     <div class="container content" style="text-align: center;">
+        <div class="input-group date" id="datetimepicker1" data-target-input="nearest">
+            <input type="text" class="form-control datetimepicker-input" data-target="#datetimepicker1"/>
+            <div class="input-group-append" data-target="#datetimepicker1" data-toggle="datetimepicker">
+            <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+    </div>
+    </div>
+
+    <script>
+      $(function () {
+        $("#datetimepicker1").datetimepicker();
+      });
+    </script>
+    </div>
         <div style="display: inline-block; width: 400px;">
             <h2>Редактировать профиль</h2>
             <form method="post" class="bootstrap-form" enctype="multipart/form-data">
@@ -10,5 +23,5 @@
                 <input type="submit" class="btn btn-success" value="Сохранить">
             </form>
         </div>
-    </div>
+
 {% endblock %}

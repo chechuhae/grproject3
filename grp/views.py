@@ -4,11 +4,11 @@ from django.views.generic import TemplateView
 from django.views import View
 from django.contrib.auth.models import User
 from django.contrib.auth import logout
-from grp.forms import LoginForm, RegisterForm, ProfileForm
+from grp.forms import RegisterForm, ProfileForm
 from django.contrib import messages
 from grp.models import Profile
 from django.urls import reverse
-from grp import forms
+from grp import forms, widgets
 
 class LoginView(TemplateView):
     template_name = "registration/login.html"
@@ -37,6 +37,12 @@ class RegisterView(TemplateView):
         if request.method == 'POST':
             form = RegisterForm(request.POST)
             if form.is_valid():
+                if User.objects.filter(username=form.cleaned_data['username']).exists():
+                    messages.error(request, u"Пользователь с таким именем уже есть, введите новое имя")
+                    return redirect("/register")
+                elif User.objects.filter(email=form.cleaned_data['email']).exists():
+                    messages.error(request, u"Пользователь с таким email уже есть, введите новый email ")
+                    return redirect("/register")
                 self.create_new_user(form)
                 messages.success(request, u"Вы успешно зарегистрировались!")
                 return redirect("/login")
@@ -50,9 +56,8 @@ class RegisterView(TemplateView):
         email = None
         if 'email' in form.cleaned_data:
             email = form.cleaned_data['email']
-        User.objects.create_user(form.cleaned_data['username'], email, form.cleaned_data['password'],
-                                 first_name=form.cleaned_data['first_name'],
-                                 last_name=form.cleaned_data['last_name'])
+        User.objects.create_user(form.cleaned_data['username'], email, form.cleaned_data['password'])
+
 
 class LogoutView(View):
     def dispatch(self, request, *args, **kwargs):
@@ -93,6 +98,14 @@ class EditProfileView(TemplateView):
 
 class ProfilePage(TemplateView):
     template_name = "registration/profile.html"
+
+
+class MyCicle(object):
+    template_name = "registration/profile.html"
+    form = forms.DateForm()
+
+
+
 
 
 

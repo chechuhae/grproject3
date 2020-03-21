@@ -14,6 +14,7 @@
                 <br>
 
             </div>
+
             <div class="col">
                 <dl class="row">
                     <dt class="col-sm-3 text-right">Имя: {{ selected_user.profile.user_name }}</dt>
@@ -21,16 +22,18 @@
                     <dt class="col-sm-3 text-right">Email {{ selected_user.email }}</dt>
                     <dt class="col-sm-3 text-right">Город {{ selected_user.profile.city }}</dt>
                     <dt class="col-sm-3 text-right">Дата рождения {{ selected_user.profile.birth_date|date:"d M Y" }}</dt>
-                    <dt class="col-sm-3 text-right">О себе <em style="font-family: 'Times New Roman', serif;">{{ selected_user.profile.bio|linebreaks }}</em></dt>
+
                 </dl>
+                <dl class="row2">
+                    {{ form.date }}
+                <form method="post">
+                  {% csrf_token %}
+                  {{ form.as_p }}
+                  <input type="submit" value="DADA">
+                </form>
+                  </dl>
             </div>
         </div>
 
     </div>
-{{ form.date }}
-<form method="post">
-  {% csrf_token %}
-  {{ form.as_p }}
-  <input type="submit" value="Submit">
-</form>
 {% endblock %}
