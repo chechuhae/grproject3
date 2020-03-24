@@ -1,17 +1,20 @@
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login
-from django.views.generic import TemplateView
+from django.views.generic import TemplateView, ListView
 from django.views import View
 from django.contrib.auth.models import User
 from django.contrib.auth import logout
-from grp.forms import RegisterForm, ProfileForm
+from grp.forms import RegisterForm, ProfileForm, CicleForm
 from django.contrib import messages
 from grp.models import Profile
 from django.urls import reverse
-from grp import forms, widgets
+from grp import models
 
 class LoginView(TemplateView):
     template_name = "registration/login.html"
+
 
     def dispatch(self, request, *args, **kwargs):
         context = {}
@@ -65,16 +68,39 @@ class LogoutView(View):
         return redirect("/")
 
 
+class CicleList(ListView):
+    model = models.Cicle
+    queryset = models.Cicle.objects.all()
+    context_object_name = 'cicle'
+
 class ProfileView(TemplateView):
     template_name = "registration/profile.html"
 
     def dispatch(self, request, *args, **kwargs):
         if not Profile.objects.filter(user=request.user).exists():
             return redirect(reverse("edit_profile"))
-        context = {
-            'selected_user': request.user
-        }
-        return render(request, self.template_name, context)
+        form = CicleForm(request.POST)
+        return render(request, self.template_name, {'selected_user': request.user,
+                                                    'form': form
+                                                    }
+                      )
+
+    def get_profile(self, user):
+        try:
+            return user.profile
+        except:
+            return None
+
+
+    def new_cicle(request):
+        if request.method == 'POST':
+            cicle = CicleForm(request.POST)
+            if cicle.is_valid():
+                new_cicle = cicle.save(commit=False)
+                new_cicle.user = request.user
+                new_cicle.save()
+                return redirect(cicle)
+
 
 class EditProfileView(TemplateView):
     template_name = "registration/edit_profile.html"
@@ -96,13 +122,8 @@ class EditProfileView(TemplateView):
         except:
             return None
 
-class ProfilePage(TemplateView):
-    template_name = "registration/profile.html"
 
 
-class MyCicle(object):
-    template_name = "registration/profile.html"
-    form = forms.DateForm()
 
 
 

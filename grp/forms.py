@@ -1,4 +1,4 @@
-from grp.models import Profile
+from grp.models import Profile, Cicle
 from django import forms
 from .widgets import BootstrapDateTimePickerInput
 
@@ -31,3 +31,31 @@ class ProfileForm(forms.ModelForm):
             input_formats=['%d/%m/%Y'],
             widget=BootstrapDateTimePickerInput() # Виджет будет применен конкретно к birth_date
         )
+        """self.fields['last_cicle_first_date'] = forms.DateTimeField(
+            input_formats=['%d/%m/%Y'],
+            widget=BootstrapDateTimePickerInput()
+
+        )
+        self.fields['last_cicle_last_date'] = forms.DateTimeField(
+            input_formats=['%d/%m/%Y'],
+            widget=BootstrapDateTimePickerInput()
+
+        )"""
+
+class CicleForm(forms.ModelForm):
+    class Meta:
+        model = Cicle
+        exclude = ['user', 'created']
+
+    def __init__(self, *args, **kwargs):
+        super(CicleForm, self).__init__(*args, **kwargs)
+        self.fields['last_cicle_first_date'] = forms.DateTimeField(
+            input_formats=['%d/%m/%Y'],
+            widget=BootstrapDateTimePickerInput()
+
+        )
+        self.fields['last_cicle_last_date'] = forms.DateTimeField(
+            input_formats=['%d/%m/%Y'],
+            widget=BootstrapDateTimePickerInput()
+        )
+

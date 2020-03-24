@@ -11,3 +11,11 @@ class ProfileAdmin(admin.ModelAdmin):
     search_fields = ('user_name', 'user_surname')
 
 
+@admin.register(models.Cicle)
+class CicleAdmin(admin.ModelAdmin):
+    list_display = ('user', 'last_cicle_first_date', 'last_cicle_last_date', 'counter',
+                    'created')
+    list_filter = ('user',)
+    search_fields = ('user',)
+
+

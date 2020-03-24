@@ -6,9 +6,9 @@
         <div class="row">
             <div class="col5">
                 {% if selected_user.profile.avatar.name %}
-                    <img src="{{ selected_user.profile.avatar.url }}" height = "100" widht = "100" class="avatar-img img-thumbnail">
+                    <img src="{{ selected_user.profile.avatar.url }}" height = "50 widht = "50" class="avatar-img img-thumbnail">
                 {% else %}
-                    <img src="{% static 'img/User.png' %}" height = "100" widht = "100" class="avatar-img img-thumbnail">
+                    <img src="{% static 'img/User.png' %}" height = "50" widht = "50" class="avatar-img img-thumbnail">
                 {% endif %}
                 <br>
                 <br>
@@ -22,17 +22,20 @@
                     <dt class="col-sm-3 text-right">Email {{ selected_user.email }}</dt>
                     <dt class="col-sm-3 text-right">Город {{ selected_user.profile.city }}</dt>
                     <dt class="col-sm-3 text-right">Дата рождения {{ selected_user.profile.birth_date|date:"d M Y" }}</dt>
-
-                </dl>
-                <dl class="row2">
-                    {{ form.date }}
-                <form method="post">
-                  {% csrf_token %}
-                  {{ form.as_p }}
-                  <input type="submit" value="DADA">
-                </form>
-                  </dl>
             </div>
+
+                </div>
+        <div style="display: inline-block; width: 400px;">
+            <h2>Мой цикл</h2>
+            <form action="." method="post" class="bootstrap-form" enctype="multipart/form-data">
+                {% csrf_token %}
+                {{ form.as_p }}
+
+                <input type="submit" class="btn btn-success" value="Сохранить">
+            </form>
+        </div>
+
+
         </div>
 
     </div>
