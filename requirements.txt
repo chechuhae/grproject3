@@ -2,7 +2,7 @@ django-bootstrap4
 nose
 ddt
 Pillow
-django==3.0.3
+django==3.1.12
 django-dbgettext
 python-gettext
 django-jquery
